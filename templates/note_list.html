@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <main class="row d-flex justify-content-center align-items-center">
+        <div class="col col-lg-8">
+            <h2 class="mt-3">Note list</h2>
+
+            {% if object_list %}
+                <ul class="list-group">
+                    {% for object in object_list %}
+                        <li class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ object.title }}</h5>
+                                {% if current_user.id == object.user_id %}
+                                <div>
+                                    <a href="{{ url_for("note_update", pk=object.id ) }}"
+                                       class="ms-1 btn btn-outline-primary">Update</a>
+                                    <a href="{{ url_for("note_delete", pk=object.id ) }}"
+                                       class="ms-1 btn btn-outline-danger">Delete</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <span class="me-md-5 me-3">{{ object.content }}</span><br>
+                            <span class="me-md-5 me-3">{{ object.user.email }} {{ object.time_create }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h3 class="text-center">
+                    No reports found
+                </h3>
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}

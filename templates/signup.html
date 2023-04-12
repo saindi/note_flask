@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <div class="row d-flex justify-content-center align-items-center h-75">
+        <div class="col-md-3 col-6">
+            <h2>Sign Up</h2>
+
+            <form method="post">
+                {{ form.hidden_tag() }}
+
+                <div class="form-floating mb-3">  <!-- email input -->
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control", placeholder="Email") }}
+                        {{ form.email.label(class="form-label") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-floating mb-3">  <!-- password input -->
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control", placeholder="Password") }}
+                        {{ form.password.label(class="form-label") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-floating mb-3">  <!-- confirm password input -->
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
+                        {{ form.confirm_password.label(class="form-label") }}
+                    {% endif %}
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    {{ form.submit(class="btn btn-block btn-lg btn-primary") }}
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <p class="text-muted">Already has an account?
+                        <a class="text-body fw-bold ms-1" href="{{ url_for("signin") }}">Sign In</a>.
+                    </p>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
